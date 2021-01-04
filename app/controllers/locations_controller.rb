@@ -5,19 +5,13 @@ class LocationsController < ApplicationController
   def index
     @locations = Location.all
 
-    render json: @locations
+    render json: @locations.to_json(include: :temperatures)
   end
 
   # GET /locations/1
   def show
-    render json: @location
-  end
-
-  # POST /locations
-  private 
-   def set_location 
     @location = Location.find(params[:id])
-   end
-
+    render json: @location.to_json(include: :temperatures)
+  end
 
 end
